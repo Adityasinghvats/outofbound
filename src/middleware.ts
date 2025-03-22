@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+// import type { NextRequest } from "next/server";
 import getOrCreateDB from "./models/server/dbSetup";
 import getOrCreateStorage from "./models/server/storageSetup";
 
 //as this is my middleware this function can everywhere we want
-export async function middleware(request: NextRequest){
+export async function middleware(){
 
     await Promise.all([
         getOrCreateDB(),
