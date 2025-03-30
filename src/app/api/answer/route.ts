@@ -7,15 +7,18 @@ import {UserPrefs} from "@/store/Auth";
 
 export async function POST(request: NextRequest){
     try {
-        const {questionId, content, authorId} = await request.json();
+        const {questionId, answer, authorId} = await request.json();
+        console.log(questionId)
+        console.log(answer)
+        console.log(authorId)
 
         const response = await databases.createDocument(db, answerCollection, ID.unique(),
         {
-            content: content,
+            content: answer,
             authorId: authorId,
             questionId: questionId
         })
-        //increase author rputation
+        //increase author reputation
         const prefs = await users.getPrefs<UserPrefs>(authorId)
         await users.updatePrefs(authorId, 
             {reputation: Number(prefs.reputation) + 1}

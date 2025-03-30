@@ -49,7 +49,8 @@ export default function Registerpage() {
         try {
             setIsLoading(true);
             setError("")
-            const res = await createAccount(name, email, password);
+            const res = await createAccount(email, password, name);
+            console.log(res)
             if(res.error){
                 setError(res.error!.message);
             }else{
@@ -83,18 +84,15 @@ export default function Registerpage() {
             <form className="my-8" onSubmit={handleSubmit}>
                 <div className="mb-4 flex flex-col space-y-2 md:flex-row md:space-x-2 md:space-y-0">
                     <LabelInputContainer>
-                        <Label htmlFor="firstname">First name</Label>
-                        <Input className="text-black" id="firstname" name="firstname" placeholder="Tyler" type="text" />
+                        <Label htmlFor="name">First name</Label>
+                        <Input className="text-white" id="name" name="name" placeholder="Tyler" type="text" />
                     </LabelInputContainer>
-                    <LabelInputContainer>
-                        <Label htmlFor="lastname">Last name</Label>
-                        <Input className="text-black"  id="lastname" name="lastname" placeholder="Durden" type="text" />
-                    </LabelInputContainer>
+                    
                 </div>
                 <LabelInputContainer className="mb-4">
                     <Label htmlFor="email">Email Address</Label>
                     <Input
-                    className="text-black" 
+                    className="text-white" 
                         id="email"
                         name="email"
                         placeholder="projectmayhem@fc.com"
@@ -103,7 +101,7 @@ export default function Registerpage() {
                 </LabelInputContainer>
                 <LabelInputContainer className="mb-4">
                     <Label htmlFor="password">Password</Label>
-                    <Input className="text-black"  id="password" name="password" placeholder="••••••••" type="password" />
+                    <Input className="text-white"  id="password" name="password" placeholder="••••••••" type="password" />
                 </LabelInputContainer>
 
                 <button
