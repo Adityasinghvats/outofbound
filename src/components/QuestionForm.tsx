@@ -13,7 +13,6 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { databases, storage } from "@/models/client/config";
 import { db, questionAttachmentbucket, questionCollection } from "@/models/name";
-import { Confetti } from "@/components/magicui/confetti";
 
 const LabelInputContainer = ({
     children,
@@ -35,11 +34,6 @@ const LabelInputContainer = ({
     );
 };
 
-/**
- * ******************************************************************************
- * ![INFO]: for buttons, refer to https://ui.aceternity.com/components/tailwindcss-buttons
- * ******************************************************************************
- */
 const QuestionForm = ({ question }: { question?: Models.Document }) => {
     const { user } = useAuthStore();
     const [tag, setTag] = React.useState("");
@@ -58,27 +52,9 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
 
     const loadConfetti = (timeInMS = 3000) => {
         const end = Date.now() + timeInMS; // 3 seconds
-        const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"];
 
         const frame = () => {
             if (Date.now() > end) return;
-
-            Confetti({
-                particleCount: 2,
-                angle: 60,
-                spread: 55,
-                startVelocity: 60,
-                origin: { x: 0, y: 0.5 },
-                colors: colors,
-            });
-            Confetti({
-                particleCount: 2,
-                angle: 120,
-                spread: 55,
-                startVelocity: 60,
-                origin: { x: 1, y: 0.5 },
-                colors: colors,
-            });
 
             requestAnimationFrame(frame);
         };

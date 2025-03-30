@@ -1,9 +1,27 @@
-import React from 'react'
+import { db, questionCollection } from "@/models/name";
+import { databases } from "@/models/server/config";
+import React from "react";
+import AddQues from "./AddQues";
+import { Particles } from "@/components/magicui/particles";
 
-function page() {
-  return (
-    <div>page</div>
-  )
-}
+const Page = async ({ params }: { params: { quesId: string; quesName: string } }) => {
+    const question = await databases.getDocument(db, questionCollection, params.quesId);
 
-export default page
+    return (
+        <div>
+            <Particles
+                className="fixed inset-0 h-full w-full"
+                quantity={500}
+                ease={100}
+                color="#ffffff"
+                refresh
+            />
+            <div className="flex justify-center items-center">
+                <AddQues question={question} />
+            </div>
+        </div>
+        
+    );
+};
+
+export default Page;

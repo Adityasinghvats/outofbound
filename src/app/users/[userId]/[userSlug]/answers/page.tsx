@@ -1,3 +1,4 @@
+import { Particles } from "@/components/magicui/particles";
 import Pagination from "@/components/Pagination";
 import { MarkdownPreview } from "@/components/RTE";
 import { answerCollection, db, questionCollection } from "@/models/name";
@@ -6,6 +7,7 @@ import slugify from "@/utils/slugify";
 import Link from "next/link";
 import { Query } from "node-appwrite";
 import React from "react";
+
 
 const Page = async ({
     params,
@@ -36,6 +38,13 @@ const Page = async ({
 
     return (
         <div className="px-4">
+            <Particles
+                className="fixed inset-0 h-full w-full"
+                quantity={500}
+                ease={100}
+                color="#ffffff"
+                refresh
+            />
             <div className="mb-4">
                 <p>{answers.total} answers</p>
             </div>

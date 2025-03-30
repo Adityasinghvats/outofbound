@@ -8,6 +8,8 @@ import QuestionCard from "@/components/QuestionCard";
 import { UserPrefs } from "@/store/Auth";
 import Pagination from "@/components/Pagination";
 import Search from "./Search";
+import { TracingBeam } from "@/components/ui/tracing-beam";
+import { Particles } from "@/components/magicui/particles";
 
 const Page = async ({
     searchParams,
@@ -63,6 +65,14 @@ const Page = async ({
     );
 
     return (
+        <TracingBeam className="container pl-6">
+                    <Particles
+                        className="fixed inset-0 h-full w-full"
+                        quantity={500}
+                        ease={100}
+                        color="#ffffff"
+                        refresh
+                    />
         <div className="container mx-auto px-4 pb-20 pt-36">
             <div className="mb-10 flex items-center justify-between">
                 <h1 className="text-3xl font-bold">All Questions</h1>
@@ -80,13 +90,14 @@ const Page = async ({
             <div className="mb-4">
                 <p>{questions.total} questions</p>
             </div>
-            <div className="mb-4 max-w-3xl space-y-6">
+            <div className="mb-4 w-full space-y-6">
                 {questions.documents.map(ques => (
                     <QuestionCard key={ques.$id} ques={ques} />
                 ))}
             </div>
             <Pagination total={questions.total} limit={25} />
         </div>
+        </TracingBeam>
     );
 };
 

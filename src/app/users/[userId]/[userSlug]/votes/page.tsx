@@ -6,6 +6,7 @@ import slugify from "@/utils/slugify";
 import Link from "next/link";
 import { Query } from "node-appwrite";
 import React from "react";
+import { Particles } from "@/components/magicui/particles";
 
 const Page = async ({
     params,
@@ -60,6 +61,13 @@ const Page = async ({
 
     return (
         <div className="px-4">
+            <Particles
+                            className="fixed inset-0 h-full w-full"
+                            quantity={500}
+                            ease={100}
+                            color="#ffffff"
+                            refresh
+                        />
             <div className="mb-4 flex justify-between">
                 <p>{votes.total} votes</p>
                 <ul className="flex gap-1">

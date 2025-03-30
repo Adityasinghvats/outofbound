@@ -5,6 +5,7 @@ import { MagicCard } from "@/components/magicui/magic-card";
 import {NumberTicker} from "@/components/magicui/number-ticker";
 import { answerCollection, db, questionCollection } from "@/models/name";
 import { Query } from "node-appwrite";
+import { Particles } from "@/components/magicui/particles";
 
 const Page = async ({ params }: { params: { userId: string; userSlug: string } }) => {
     const [user, questions, answers] = await Promise.all([
@@ -20,7 +21,15 @@ const Page = async ({ params }: { params: { userId: string; userSlug: string } }
     ]);
 
     return (
+                            
         <div>
+            <Particles
+                className="fixed inset-0 h-full w-full"
+                quantity={500}
+                ease={100}
+                color="#ffffff"
+                refresh
+            />
             <MagicCard className="flex w-full cursor-pointer flex-col items-center justify-center overflow-hidden p-20 shadow-2xl">
                 <div className="text-center">
                     <h2 className="text-xl font-medium z-10">User reputation</h2>
@@ -49,35 +58,6 @@ const Page = async ({ params }: { params: { userId: string; userSlug: string } }
             </MagicCard>
         
         </div>
-        // <div>
-        //     <MagicCard className="flex w-full cursor-pointer flex-col items-center justify-center overflow-hidden p-8 shadow-2xl">
-        //         <div className="flex flex-col items-center justify-center">
-        //             <h2 className="text-xl font-medium">Reputation</h2>
-        //             <p className="whitespace-nowrap text-4xl font-medium">
-        //                 <NumberTicker value={user.prefs.reputation} />
-        //             </p>
-        //         </div>
-        //         <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
-        //     </MagicCard>
-        //     <MagicCard className="flex w-full cursor-pointer flex-col items-center justify-center overflow-hidden p-8 shadow-2xl">
-        //         <div className="flex flex-col items-center justify-center">
-        //             <h2 className="text-xl font-medium">Questions asked</h2>
-        //             <p className="whitespace-nowrap text-4xl font-medium">
-        //                 <NumberTicker value={questions.total} />
-        //             </p>
-        //         </div>
-        //         <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
-        //     </MagicCard>
-        //     <MagicCard className="flex w-full cursor-pointer flex-col items-center justify-center overflow-hidden p-8 shadow-2xl">
-        //         <div className="flex flex-col items-center justify-center">
-        //             <h2 className="text-xl font-medium">Answers given</h2>
-        //             <p className="whitespace-nowrap text-4xl font-medium">
-        //                 <NumberTicker value={answers.total} />
-        //             </p>
-        //         </div>
-        //         {/* <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" /> */}
-        //     </MagicCard>
-        // </div>
     );
 };
 
