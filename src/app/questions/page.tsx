@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { databases, users } from "@/models/server/config";
 import { answerCollection, db, voteCollection, questionCollection } from "@/models/name";
 import { Query } from "node-appwrite";
@@ -17,20 +17,25 @@ const Page = async ({
 }: {
     searchParams: { page?: string; tag?: string; search?: string };
 }) => {
-    searchParams.page ||= "1";
+    const searchForParams = await searchParams;
+    const params = {
+        page: searchForParams?.page || "1",
+        tag: searchForParams?.tag || "",
+        search: searchForParams?.search || ""
+    }
 
     const queries = [
         Query.orderDesc("$createdAt"),
-        Query.offset((+searchParams.page - 1) * 25),
+        Query.offset((+params?.page - 1) * 25),
         Query.limit(25),
     ];
 
-    if (searchParams.tag) queries.push(Query.equal("tags", searchParams.tag));
-    if (searchParams.search)
+    if (params.tag) queries.push(Query.equal("tags", params.tag));
+    if (params.search)
         queries.push(
             Query.or([
-                Query.search("title", searchParams.search),
-                Query.search("content", searchParams.search),
+                Query.search("title", params.search),
+                Query.search("content", params.search),
             ])
         );
 

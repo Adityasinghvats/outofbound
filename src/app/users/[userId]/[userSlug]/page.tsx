@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { databases, users } from "@/models/server/config";
 import { UserPrefs } from "@/store/Auth";
 import React from "react";

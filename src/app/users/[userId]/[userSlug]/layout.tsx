@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { avatars } from "@/models/client/config";
 import { users } from "@/models/server/config";
 import { UserPrefs } from "@/store/Auth";

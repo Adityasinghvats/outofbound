@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React from "react";
 import AddQues from "./AddQues";
 import { Particles } from "@/components/magicui/particles";

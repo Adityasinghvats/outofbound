@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use client";
 
 import QuestionForm from "@/components/QuestionForm";
@@ -16,7 +16,7 @@ const EditQues = ({ question }: { question: Models.Document }) => {
         if (question.authorId !== user?.$id) {
             router.push(`/questions/${question.$id}/${slugify(question.title)}`);
         }
-    }, []);
+    }, [question, router, user]);
 
     if (user?.$id !== question.authorId) return null;
 
