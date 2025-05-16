@@ -17,25 +17,20 @@ const Page = async ({
 }: {
     searchParams: { page?: string; tag?: string; search?: string };
 }) => {
-    const searchForParams = await searchParams;
-    const params = {
-        page: searchForParams?.page || "1",
-        tag: searchForParams?.tag || "",
-        search: searchForParams?.search || ""
-    }
+    searchParams.page ||= "1";
 
     const queries = [
         Query.orderDesc("$createdAt"),
-        Query.offset((+params?.page - 1) * 25),
+        Query.offset((+searchParams.page - 1) * 25),
         Query.limit(25),
     ];
 
-    if (params.tag) queries.push(Query.equal("tags", params.tag));
-    if (params.search)
+    if (searchParams.tag) queries.push(Query.equal("tags", searchParams.tag));
+    if (searchParams.search)
         queries.push(
             Query.or([
-                Query.search("title", params.search),
-                Query.search("content", params.search),
+                Query.search("title", searchParams.search),
+                Query.search("content", searchParams.search),
             ])
         );
 
