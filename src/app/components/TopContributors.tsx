@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { cn } from "@/lib/utils";
-
 import { AnimatedList } from "@/components/magicui/animated-list";
 import { users } from "@/models/server/config";
 import { Models, Query } from "node-appwrite";

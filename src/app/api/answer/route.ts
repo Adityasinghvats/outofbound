@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { answerCollection } from "@/models/name";
 import { databases, users } from "@/models/server/config";
 import { NextRequest, NextResponse } from "next/server";
