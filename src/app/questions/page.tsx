@@ -15,7 +15,7 @@ import { Particles } from "@/components/magicui/particles";
 const Page = async ({
     searchParams,
 }: {
-    searchParams: { page?: string; tag?: string; search?: string };
+    searchParams: Promise<{ page?: string; tag?: string; search?: string }>;
 }) => {
     const searchForParams = await searchParams;
     const params = {
