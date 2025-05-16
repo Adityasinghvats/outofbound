@@ -50,6 +50,7 @@ const Page = async ({ params }: { params: { quesId: string; quesName: string } }
             Query.orderDesc("$createdAt"),
         ]),
     ]);
+    
 
     // since it is dependent on the question, we fetch it here outside of the Promise.all
     const author = await users.get<UserPrefs>(question.authorId);
@@ -167,18 +168,20 @@ const Page = async ({ params }: { params: { quesId: string; quesName: string } }
                     </div>
                     <div className="w-full overflow-auto">
                         <MarkdownPreview className="rounded-xl p-4" source={question.content} />
-                        <picture>
+                        {question.attachmentId && (<picture>
                             <img
                                 src={
-                                    storage.getFilePreview(
+                                    storage.getFileView(
                                         questionAttachmentbucket,
                                         question.attachmentId
-                                    )
+                                    ).toString()
                                 }
                                 alt={question.title}
                                 className="mt-3 rounded-lg"
                             />
-                        </picture>
+                        </picture>)}
+                        
+
                         <div className="mt-3 flex flex-wrap items-center gap-3 text-sm">
                             {question.tags.map((tag: string) => (
                                 <Link

@@ -5,7 +5,7 @@ import { persist } from "zustand/middleware";
 import {AppwriteException, ID, Models} from "appwrite";
 import { account } from "@/models/client/config";
 
-//create a reputation for user based on thier votes
+//create a reputation for user based on their votes
 export interface UserPrefs {
     reputation: number,
 }

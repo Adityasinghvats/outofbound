@@ -14,7 +14,7 @@ export async function middleware(){
     return NextResponse.next();
 }
 
-//wherever the matches matches the path our code will not run there
+//wherever the matcher matches the path our code will not run there
 export const config = {
     /*
     match all req path except for the ones start with

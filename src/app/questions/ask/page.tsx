@@ -1,12 +1,8 @@
-import { db, questionCollection } from "@/models/name";
-import { databases } from "@/models/server/config";
 import React from "react";
 import AddQues from "./AddQues";
 import { Particles } from "@/components/magicui/particles";
 
-const Page = async ({ params }: { params: { quesId: string; quesName: string } }) => {
-    const question = await databases.getDocument(db, questionCollection, params.quesId);
-
+const Page = async () => {
     return (
         <div>
             <Particles
@@ -17,10 +13,9 @@ const Page = async ({ params }: { params: { quesId: string; quesName: string } }
                 refresh
             />
             <div className="flex justify-center items-center">
-                <AddQues question={question} />
+                <AddQues/>
             </div>
         </div>
-        
     );
 };
 

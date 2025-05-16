@@ -10,10 +10,12 @@ export default function Home() {
   const {user} = useAuthStore()
   const ref = React.useRef<HTMLDivElement>(null);
   const [height, setHeight] = React.useState(0);
+  
   React.useEffect(() => {
           if (ref.current) {
               setHeight(ref.current.clientHeight);
           }
+          
       }, [ref]);
   return (
     <div className="bg-black text-white min-h-screen py-20 mt-20">

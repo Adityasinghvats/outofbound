@@ -1,24 +1,9 @@
 "use client";
 
 import QuestionForm from "@/components/QuestionForm";
-import { useAuthStore } from "@/store/Auth";
-import slugify from "@/utils/slugify";
-import { Models } from "appwrite";
-import { useRouter } from "next/navigation";
 import React from "react";
 
-const AddQues = ({ question }: { question: Models.Document }) => {
-    const { user } = useAuthStore();
-    const router = useRouter();
-
-    React.useEffect(() => {
-        if (question.authorId !== user?.$id) {
-            router.push(`/questions/${question.$id}/${slugify(question.title)}`);
-        }
-    }, []);
-
-    if (user?.$id !== question.authorId) return null;
-
+const AddQues = () => {
     return (
         <div className="pb-20 pt-32">
             <div className="container mx-auto px-4">
@@ -27,7 +12,7 @@ const AddQues = ({ question }: { question: Models.Document }) => {
                 <div className="flex flex-wrap md:flex-row-reverse">
                     <div className="w-full"></div>
                     <div className="w-full">
-                        <QuestionForm question={question} />
+                        <QuestionForm />
                     </div>
                 </div>
             </div>

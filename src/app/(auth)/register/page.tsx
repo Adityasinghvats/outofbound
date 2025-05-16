@@ -65,7 +65,7 @@ export default function Registerpage() {
         setIsLoading(false);
     }
   return (
-    <div className="mx-auto w-full max-w-md rounded-none border border-solid border-white/30 bg-white p-4 shadow-input dark:bg-black md:rounded-2xl md:p-8">
+    <div className="mt-20 mx-auto w-full max-w-md rounded-none border border-solid border-white/30 bg-white p-4 shadow-input dark:bg-black md:rounded-2xl md:p-8">
             <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
                 Welcome to Riverflow
             </h2>
