@@ -17,7 +17,6 @@ const BottomGradient = () => {
     );
 };
 
-
 const LabelInputContainer = ({
     children,
     className,

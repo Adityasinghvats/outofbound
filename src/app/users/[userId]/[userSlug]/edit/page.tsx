@@ -1,4 +1,4 @@
-
+"use client";
 import { Particles } from "@/components/magicui/particles";
 import React from "react";
 

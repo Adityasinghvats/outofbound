@@ -1,4 +1,4 @@
-
+"use client";
 import Pagination from "@/components/Pagination";
 import QuestionCard from "@/components/QuestionCard";
 import { answerCollection, db, questionCollection, voteCollection } from "@/models/name";
