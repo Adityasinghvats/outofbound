@@ -1,4 +1,4 @@
-"use client";
+
 import { databases, users } from "@/models/server/config";
 import { UserPrefs } from "@/store/Auth";
 import React from "react";

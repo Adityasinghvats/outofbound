@@ -1,4 +1,4 @@
-"use client";
+
 import { db, questionCollection } from "@/models/name";
 import { databases } from "@/models/server/config";
 import React from "react";
