@@ -22,7 +22,7 @@
     "framer-motion": "^12.5.0",
     "immer": "^10.1.1",
     "lucide-react": "^0.483.0",
-    "motion": "^12.6.2",
+    "motion": "^12.12.1",
     "next": "15.2.3",
     "node-appwrite": "^15.0.1",
     "react": "^19.0.0",

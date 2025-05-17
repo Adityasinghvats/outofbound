@@ -15,7 +15,7 @@ export default function Layout({
     const router = useRouter();
     React.useEffect(() => {
         if (session){
-            router.push('/')
+            router.push('/questions')
         }
     }, [session, router])
     if (session){
