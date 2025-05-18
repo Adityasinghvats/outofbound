@@ -13,9 +13,10 @@ const LatestQuestions = async () => {
     ]);
     console.log("Fetched Questions:", questions);
 
-    questions.documents = await Promise.all(
+    const mappedQuestions = await Promise.all(
         questions.documents.map(async ques => {
-            const [author, answers, votes] = await Promise.all([
+            try {
+                const [author, answers, votes] = await Promise.all([
                 users.get<UserPrefs>(ques.authorId),
                 databases.listDocuments(db, answerCollection, [
                     Query.equal("questionId", ques.$id),
@@ -27,7 +28,6 @@ const LatestQuestions = async () => {
                     Query.limit(1), // for optimization
                 ]),
             ]);
-
             return {
                 ...ques,
                 totalAnswers: answers.total,
@@ -38,8 +38,14 @@ const LatestQuestions = async () => {
                     name: author.name,
                 },
             };
+            } catch (error) {
+                console.log("Error fetching lastest questions", error)
+                return undefined;
+            }
         })
     );
+    questions.documents = mappedQuestions.filter((q): q is NonNullable<typeof q> => q !== undefined);
+    console.log("Mapped:",questions.documents)
 
     return (
         <div className="space-y-6">
