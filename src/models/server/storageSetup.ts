@@ -21,7 +21,7 @@ export default async function getOrCreateStorage(){
                 false,
                 undefined,
                 undefined,
-                ["jpeg", "png", "gif", "webp", "heic"]
+                [],
             )
             console.log("Bucket is created")
             console.log("Storage connected")
@@ -31,3 +31,4 @@ export default async function getOrCreateStorage(){
         console.error("error creating storage: ", error)
     }
 }
+// "jpeg", "png", "gif", "webp", "heic", "jpg"

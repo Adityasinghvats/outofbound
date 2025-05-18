@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-
 import { motion } from "motion/react";
 import {
   ComponentPropsWithoutRef,
@@ -18,7 +16,7 @@ export interface AnimatedGridPatternProps
   height?: number;
   x?: number;
   y?: number;
-  strokeDasharray?: any;
+  strokeDasharray?: number;
   numSquares?: number;
   maxOpacity?: number;
   duration?: number;
