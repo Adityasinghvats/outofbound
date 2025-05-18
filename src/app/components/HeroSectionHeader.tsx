@@ -1,4 +1,3 @@
-"use client";
 
 import {IconCloud} from "@/components/magicui/icon-cloud";
 import {Particles} from "@/components/magicui/particles";
@@ -67,13 +66,22 @@ const HeroSectionHeader = () => {
                         </p>
                         <div className="flex items-center justify-center gap-4">
                             {session ? (
-                                <Link href="/questions/ask">
+                                <div className="flex flex-row gap-4">
+                                    <Link href="/questions/ask">
                                     <ShimmerButton className="shadow-2xl">
                                         <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-lg">
                                             Ask a question
                                         </span>
                                     </ShimmerButton>
-                                </Link>
+                                    </Link>
+                                    <Link href="/stats">
+                                    <ShimmerButton className="shadow-2xl">
+                                        <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-lg">
+                                            See stats
+                                        </span>
+                                    </ShimmerButton>
+                                    </Link>
+                                </div>
                             ) : (
                                 <>
                                     <Link href="/register">
