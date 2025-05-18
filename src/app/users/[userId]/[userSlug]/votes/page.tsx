@@ -1,4 +1,4 @@
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Pagination from "@/components/Pagination";
 import { answerCollection, db, questionCollection, voteCollection } from "@/models/name";
 import { databases } from "@/models/server/config";
@@ -30,46 +30,72 @@ const Page = async (
 
     const votes = await databases.listDocuments(db, voteCollection, query);
 
-    votes.documents = await Promise.all(
+    votes.documents = (await Promise.all(
         votes.documents.map(async vote => {
-            const questionOfTypeQuestion =
-                vote.type === "question"
-                    ? await databases.getDocument(db, questionCollection, vote.typeId, [
-                          Query.select(["title"]),
-                      ])
-                    : null;
+            try {
+                // For votes on questions
+                if (vote.type === "question") {
+                    const questionOfTypeQuestion = await databases.getDocument(
+                        db,
+                        questionCollection,
+                        vote.typeId,
+                        [Query.select(["title"])]
+                    );
 
-            if (questionOfTypeQuestion) {
+                    return {
+                        ...vote,
+                        question: questionOfTypeQuestion,
+                    };
+                }
+
+                // For votes on answers
+                try {
+                    const answer = await databases.getDocument(db, answerCollection, vote.typeId);
+                    const questionOfTypeAnswer = await databases.getDocument(
+                        db,
+                        questionCollection,
+                        answer.questionId,
+                        [Query.select(["title"])]
+                    );
+
+                    return {
+                        ...vote,
+                        question: questionOfTypeAnswer,
+                    };
+                } catch (error:any) {
+                    // If answer or its question is deleted, mark it
+                    console.log(error)
+                    return {
+                        ...vote,
+                        question: {
+                            $id: vote.typeId,
+                            title: "[Deleted Content]",
+                        },
+                    };
+                }
+            } catch (error:any) {
+                console.log(error)
+                // Return a placeholder for deleted content
                 return {
                     ...vote,
-                    question: questionOfTypeQuestion,
+                    question: {
+                        $id: vote.typeId,
+                        title: "[Deleted Content]",
+                    },
                 };
             }
-
-            const answer = await databases.getDocument(db, answerCollection, vote.typeId);
-            const questionOfTypeAnswer = await databases.getDocument(
-                db,
-                questionCollection,
-                answer.questionId,
-                [Query.select(["title"])]
-            );
-
-            return {
-                ...vote,
-                question: questionOfTypeAnswer,
-            };
         })
-    );
+    )).filter(vote => vote !== null); // Remove any null entries
 
     return (
         <div className="px-4">
             <Particles
-                            className="fixed inset-0 h-full w-full"
-                            quantity={500}
-                            ease={100}
-                            color="#ffffff"
-                            refresh
-                        />
+                className="fixed inset-0 h-full w-full"
+                quantity={500}
+                ease={100}
+                color="#ffffff"
+                refresh
+            />
             <div className="mb-4 flex justify-between">
                 <p>{votes.total} votes</p>
                 <ul className="flex gap-1">
@@ -118,12 +144,18 @@ const Page = async (
                         <div className="flex">
                             <p className="mr-4 shrink-0">{vote.voteStatus}</p>
                             <p>
-                                <Link
-                                    href={`/questions/${vote.question.$id}/${slugify(vote.question.title)}`}
-                                    className="text-orange-500 hover:text-orange-600"
-                                >
-                                    {vote.question.title}
-                                </Link>
+                                {vote.question.title === "[Deleted Content]" ? (
+                                    <span className="text-gray-500 italic">
+                                        {vote.question.title}
+                                    </span>
+                                ) : (
+                                    <Link
+                                        href={`/questions/${vote.question.$id}/${slugify(vote.question.title)}`}
+                                        className="text-orange-500 hover:text-orange-600"
+                                    >
+                                        {vote.question.title}
+                                    </Link>
+                                )}
                             </p>
                         </div>
                         <p className="text-right text-sm">
