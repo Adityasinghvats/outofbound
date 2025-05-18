@@ -85,8 +85,8 @@ export const useAuthStore = create<AuthStore>()(
 
             async logout() {
                 try {
-                    await account.deleteSessions();
                     set({session: null, jwt:null, user: null});
+                    await account.deleteSessions();
                 } catch (error) {
                     console.log("Error logout", error);
                 }
