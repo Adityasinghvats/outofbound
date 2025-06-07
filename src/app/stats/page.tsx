@@ -1,6 +1,8 @@
 import LatestQuestions from "../components/LatestQuestions";
 import TopContributers from "../components/TopContributors";
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0;
 const Page = async () => {
     return (
         <div className="mt-20 container mx-auto px-4 py-8">
